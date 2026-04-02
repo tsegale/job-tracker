@@ -1,7 +1,5 @@
 // src/api/jobs.js
-const BASE_URL =
-  import.meta.env.VITE_API_URL ||
-  "https://job-tracker-production-7a63.up.railway.app/api";
+const BASE_URL = 'https://job-tracker-production-7a63.up.railway.app/api';
 
 async function request(path, options = {}) {
   const res = await fetch(`${BASE_URL}${path}`, {
