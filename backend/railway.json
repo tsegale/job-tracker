@@ -3,7 +3,7 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "gunicorn job_tracker.wsgi:application --bind 0.0.0.0:8000 --workers 1",
+    "startCommand": "python manage.py migrate && gunicorn job_tracker.wsgi:application --bind 0.0.0.0:8000 --workers 1",
     "restartPolicyType": "ON_FAILURE"
   }
 }

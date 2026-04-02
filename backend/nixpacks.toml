@@ -1,8 +1,5 @@
 [phases.install]
 cmds = ["pip install -r requirements.txt"]
 
-[phases.build]
-cmds = ["python manage.py migrate"]
-
 [start]
-cmd = "gunicorn job_tracker.wsgi:application --bind 0.0.0.0:8000 --workers 1"
+cmd = "python manage.py migrate && gunicorn job_tracker.wsgi:application --bind 0.0.0.0:8000 --workers 1"
