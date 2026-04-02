@@ -3,9 +3,9 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
+  base: "/job-tracker/",
   server: {
     port: 3000,
-    base: "/job-tracker/",
     proxy: {
       "/api": {
         target: "http://localhost:8000",
