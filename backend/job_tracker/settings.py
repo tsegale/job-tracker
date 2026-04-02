@@ -118,3 +118,4 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = '/static/'
