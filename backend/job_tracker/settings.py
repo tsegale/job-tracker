@@ -110,8 +110,7 @@ REST_FRAMEWORK = {
     ],
 }
 
-# CORS — allow React dev server
-CORS_ALLOW_ALL_ORIGINS = False  # Tighten in production
+CORS_ALLOW_ALL_ORIGINS = False  
 CORS_ALLOWED_ORIGINS = [
   'https://tsegale.github.io',
     'http://localhost:3000',
