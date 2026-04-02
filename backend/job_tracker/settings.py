@@ -9,7 +9,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-job-tracker-secret-key-change-in-production'
 
-DEBUG = False
+DEBUG = False 
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -120,4 +121,4 @@ CORS_ALLOWED_ORIGINS = [
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
