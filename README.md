@@ -46,11 +46,9 @@
 
 ## 📸 Screenshots
 
-_(Add screenshots here — VERY IMPORTANT)_
-
 ```md
 ![Dashboard](screenshots/dashboard.png)
-![Add Job](screenshots/add-job.png)
+![Add Job](screenshots/newapplication.png)
 ```
 
 ⚙️ How It Works
