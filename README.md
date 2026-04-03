@@ -1,187 +1,95 @@
-# ⚡ JobTrack — Smart Job Application Tracker
+# ◈ Smart Job Tracker (Full-Stack Web Application)
 
-A full-stack web app to manage your entire job search pipeline — built with **React**, **Django REST Framework**, and **PostgreSQL**.
+> A full-stack job tracking platform built with React and Django REST Framework to manage job applications, track progress, and analyze outcomes.
 
----
+## 🔗 Live Demo
 
-## ✨ Features
-
-- ➕ **Add** job applications with full details (company, role, salary, URL, notes)
-- 📋 **View** all applications in a responsive card grid
-- ✏️ **Edit** any application inline via modal
-- 🗑️ **Delete** with confirmation dialog
-- 🔄 **Quick status update** directly from each card
-- 🔍 **Filter** by status (Wishlist / Applied / Interview / Offer / Rejected / Withdrawn)
-- 🔎 **Search** across company, role, location, and notes
-- 📊 **Stats bar** showing counts per status
-- 📦 **REST API** with filtering, searching, ordering, and pagination
-- 🐳 **Docker Compose** for one-command startup
+👉 https://tsegale.github.io/job-tracker/
 
 ---
 
-## 🏗️ Project Structure
+## 🚀 Features
 
-```
-job-tracker/
-├── backend/                  # Django REST Framework
-│   ├── job_tracker/          # Django project (settings, urls, wsgi)
-│   ├── jobs/                 # Jobs app
-│   │   ├── models.py         # JobApplication model
-│   │   ├── serializers.py    # DRF serializers (full + list)
-│   │   ├── views.py          # ViewSet with stats + quick-status endpoints
-│   │   ├── filters.py        # django-filter FilterSet
-│   │   ├── urls.py           # Router registration
-│   │   └── admin.py          # Django admin
-│   ├── manage.py
-│   ├── requirements.txt
-│   └── Dockerfile
-├── frontend/                 # React + Vite
-│   ├── src/
-│   │   ├── api/jobs.js       # Fetch-based API client
-│   │   ├── hooks/useJobs.js  # Custom hook (state + CRUD)
-│   │   ├── components/
-│   │   │   ├── JobCard.jsx
-│   │   │   ├── JobForm.jsx
-│   │   │   ├── StatsBar.jsx
-│   │   │   ├── FilterBar.jsx
-│   │   │   ├── Modal.jsx
-│   │   │   └── ConfirmDialog.jsx
-│   │   ├── App.jsx
-│   │   ├── main.jsx
-│   │   └── index.css
-│   ├── package.json
-│   ├── vite.config.js
-│   └── Dockerfile
-└── docker-compose.yml
+- Full CRUD operations for job applications
+- Track application status (Applied, Interview, Offer, Rejected)
+- Smart filtering and keyword search
+- Real-time statistics (total, active, offers, rejected)
+- Responsive UI with dynamic updates
+- RESTful API powering frontend interactions
+
+---
+
+## 🛠 Tech Stack
+
+**Frontend**
+
+- React (Vite)
+- JavaScript
+- CSS
+
+**Backend**
+
+- Django
+- Django REST Framework
+
+**Database**
+
+- SQLite (development)
+- PostgreSQL-ready (production)
+
+**Deployment**
+
+- Railway (backend)
+- GitHub Pages (frontend)
+
+---
+
+## 📸 Screenshots
+
+_(Add screenshots here — VERY IMPORTANT)_
+
+```md
+![Dashboard](screenshots/dashboard.png)
+![Add Job](screenshots/add-job.png)
 ```
 
----
+⚙️ How It Works
 
-## 🚀 Quick Start
+- Backend exposes REST API endpoints for managing job data
+- Frontend consumes API using dynamic React components
+- Application state updates in real-time based on user actions
+- Filtering and search are handled client-side for responsiveness
 
-### Option 1 — Docker Compose (recommended)
+🧠 Key Concepts Demonstrated
+-Full-stack architecture (frontend + backend separation)
+-REST API design and integration
+-CRUD operations and data flow
+-State management in React
+-Deployment across multiple platforms
+-Environment configuration and CORS handling
 
-```bash
-git clone <your-repo>
-cd job-tracker
-docker-compose up --build
-```
+🚀 Getting Started
 
-- Frontend: http://localhost:3000
-- API: http://localhost:8000/api/
-- Django Admin: http://localhost:8000/admin/
+Backend
 
----
+- cd backend
+- pip install -r requirements.txt
+- python manage.py migrate
+- python manage.py runserver
 
-### Option 2 — Manual Setup
+Frontend
 
-#### Backend
+- cd frontend
+- npm install
+- npm run dev
 
-```bash
-cd backend
+📌 Future Improvements
 
-# Create & activate venv
-python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
+- User authentication (JWT)
+- Personalized dashboards
+- Email notifications for application updates
+- Analytics and insights (success rate, trends)
 
-# Install dependencies
-pip install -r requirements.txt
+📄 License
 
-# Set up PostgreSQL (or use SQLite — see settings.py comment)
-createdb job_tracker_db
-
-# Run migrations
-python manage.py migrate
-
-# (Optional) create superuser for admin panel
-python manage.py createsuperuser
-
-# Start server
-python manage.py runserver
-```
-
-#### Frontend
-
-```bash
-cd frontend
-npm install
-cp .env.example .env        # Edit VITE_API_URL if needed
-npm run dev
-```
-
----
-
-## 🔌 API Reference
-
-Base URL: `http://localhost:8000/api/`
-
-| Method | Endpoint                     | Description                  |
-|--------|------------------------------|------------------------------|
-| GET    | `/jobs/`                     | List all applications        |
-| POST   | `/jobs/`                     | Create new application       |
-| GET    | `/jobs/{id}/`                | Get single application       |
-| PUT    | `/jobs/{id}/`                | Full update                  |
-| PATCH  | `/jobs/{id}/`                | Partial update               |
-| DELETE | `/jobs/{id}/`                | Delete application           |
-| PATCH  | `/jobs/{id}/status/`         | Quick status-only update     |
-| GET    | `/jobs/stats/`               | Counts by status + total     |
-
-### Query Parameters for `GET /jobs/`
-
-| Param           | Example              | Description                    |
-|-----------------|----------------------|--------------------------------|
-| `status`        | `?status=applied`    | Filter by status (multi ok)    |
-| `search`        | `?search=google`     | Full-text search               |
-| `ordering`      | `?ordering=-created_at` | Sort field (prefix `-` desc) |
-| `company`       | `?company=acme`      | Company name contains          |
-| `created_after` | `?created_after=2024-01-01` | Date range filter       |
-
-### Status Values
-
-`wishlist` · `applied` · `interview` · `offer` · `rejected` · `withdrawn`
-
----
-
-## 🗄️ Data Model
-
-```python
-JobApplication:
-  company        CharField
-  role           CharField
-  status         CharField (choices)
-  location       CharField (optional)
-  job_url        URLField (optional)
-  salary_min     PositiveIntegerField (optional)
-  salary_max     PositiveIntegerField (optional)
-  notes          TextField (optional)
-  date_applied   DateField (optional)
-  date_interview DateField (optional)
-  created_at     DateTimeField (auto)
-  updated_at     DateTimeField (auto)
-```
-
----
-
-## 🛣️ Roadmap / Future Features
-
-- [ ] User authentication (JWT)
-- [ ] Email/calendar reminders for follow-ups
-- [ ] Kanban board view
-- [ ] CSV import/export
-- [ ] Interview notes with rich text
-- [ ] Company research integration
-- [ ] Analytics dashboard with charts
-- [ ] Mobile app (React Native)
-
----
-
-## 🧰 Tech Stack
-
-| Layer     | Technology                         |
-|-----------|------------------------------------|
-| Frontend  | React 18, Vite, CSS Variables      |
-| Backend   | Django 4.2, Django REST Framework  |
-| Database  | PostgreSQL 16                      |
-| Filtering | django-filter                      |
-| CORS      | django-cors-headers                |
-| Container | Docker + Docker Compose            |
+MIT © 2026
